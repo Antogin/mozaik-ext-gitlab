@@ -7,7 +7,9 @@ import Branches            from './Branches.jsx';
 import MergeRequestsGauge  from './MergeRequestsGauge.jsx';
 import PipelinesHistory  from './PipelinesHistory.jsx';
 import MergeRequests  from './MergeRequests.jsx';
+import GroupMergeRequests  from './GroupMergeRequests.jsx';
 import MergeRequestsGaugeGroups  from './MergeRequestGaugeGroups.jsx';
+import MergeRequestsGaugeGroup  from './MergeRequestsGaugeGroup.jsx';
 
 
 export default {
@@ -20,5 +22,7 @@ export default {
     Branches,
     MergeRequests,
     MergeRequestsGauge,
+    GroupMergeRequests,
+    MergeRequestsGaugeGroup,
     MergeRequestsGaugeGroups
 };
