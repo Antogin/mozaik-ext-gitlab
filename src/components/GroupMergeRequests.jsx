@@ -5,33 +5,32 @@ import Mozaik                          from 'mozaik/browser';
 import MergeRequestItem                          from './MergeRequest';
 
 
-class MergeRequests extends Component {
+class GroupMergeRequests extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             mergeRequests:  [],
-            groups:  [],
+            group:  [],
             query: {}
         };
     }
 
     getApiRequest() {
-        const { groups, query } = this.props;
+        const { group, query } = this.props;
 
         return {
-            id:     `gitlab.groupsMergeRequests.${ groups }`,
-            params: { groups, query }
+            id:     `gitlab.groupMergeRequests.${ group }`,
+            params: { group, query }
         };
     }
 
-    onApiData({ groups, mergeRequests }) {
-        const flattenArray = (arr) => [].concat.apply([], arr);
-        this.setState({ groups, mergeRequests: flattenArray(mergeRequests) });
+    onApiData({ group, mergeRequests }) {
+        this.setState({ group, mergeRequests });
     }
 
     render() {
-        const { groups, mergeRequests } = this.state;
+        const { mergeRequests } = this.state;
 
         return (
             <div>
@@ -50,15 +49,15 @@ class MergeRequests extends Component {
     }
 }
 
-MergeRequests.propTypes = {
-    groups: PropTypes.oneOfType([
+GroupMergeRequests.propTypes = {
+    group: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
     ]).isRequired
 };
 
-reactMixin(MergeRequests.prototype, ListenerMixin);
-reactMixin(MergeRequests.prototype, Mozaik.Mixin.ApiConsumer);
+reactMixin(GroupMergeRequests.prototype, ListenerMixin);
+reactMixin(GroupMergeRequests.prototype, Mozaik.Mixin.ApiConsumer);
 
 
-export default MergeRequests;
+export default GroupMergeRequests;

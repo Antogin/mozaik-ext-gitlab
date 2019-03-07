@@ -75,7 +75,7 @@ const client = mozaik => {
                 })
             });
         },
-        groupMergeRequests({ groups, query={} }) {
+        groupsMergeRequests({ groups, query={} }) {
             const reqs = groups.map((group) => {
                 return buildApiRequest(`/groups/${encodeURIComponent(group)}/merge_requests`, query);
             });
@@ -83,6 +83,13 @@ const client = mozaik => {
                 mergeRequests: Promise.all(reqs).then((data) => {
                     return data.map((item) => item.body);
                 })
+            });
+        },
+        groupMergeRequests({ group, query={} }) {
+            const req = buildApiRequest(`/groups/${encodeURIComponent(group)}/merge_requests`, query);
+            
+            return Promise.props({
+                mergeRequests: req.then(data =>  data.body) 
             });
         },
         projectPipelines({ project, query={} }) {
